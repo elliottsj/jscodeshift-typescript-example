@@ -1,0 +1,17 @@
+{
+  "name": "jscodeshift-transforms",
+  "version": "0.0.0",
+  "description": "A collection of jscodeshift transforms",
+  "main": "index.js",
+  "repository": "git@github.com:elliottsj/jscodeshift-transforms.git",
+  "author": "Spencer Elliott <me@elliottsj.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "babylon": "^7.0.0-beta.39",
+    "jest": "^22.2.2",
+    "jscodeshift": "github:elliottsj/jscodeshift#typescript"
+  }
+}
