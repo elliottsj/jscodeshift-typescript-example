@@ -10,8 +10,8 @@
     "test": "jest"
   },
   "devDependencies": {
-    "babylon": "^7.0.0-beta.39",
-    "jest": "^22.2.2",
+    "babylon": "^7.0.0-beta.44",
+    "jest": "^22.4.3",
     "jscodeshift": "^0.5.0",
     "recast": "^0.14.7"
   }
