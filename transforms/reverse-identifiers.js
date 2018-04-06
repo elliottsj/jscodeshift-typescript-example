@@ -8,6 +8,7 @@
  */
 
 const babylon = require('babylon');
+const recast = require('recast');
 
 /**
  * Example jscodeshift transformer. Simply reverses the names of all
@@ -15,27 +16,22 @@ const babylon = require('babylon');
  * https://github.com/facebook/jscodeshift/blob/7be2557f369794e915afe7f91ab81b1215e66857/sample/reverse-identifiers.js
  */
 function transform(file, api) {
+  const parse = source => babylon.parse(source, {
+    sourceType: 'module',
+    plugins: file.path.endsWith('.tsx') ? ['jsx', 'typescript'] : ['typescript'],
+  });
+  
   const j = api.jscodeshift;
-
-  return j(file.source)
+  
+  return j(recast.parse(file.source, { parser: { parse } }))
     .find(j.Identifier)
     .replaceWith(
-      p => {
-        return {
-          ...j.identifier(p.node.name.split('').reverse().join('')),
-          typeAnnotation: p.value.typeAnnotation
-        };
-      }
+      p => ({
+        ...p.node,
+        name: p.node.name.split('').reverse().join('')
+      })
     )
     .toSource();
 }
 
 module.exports = transform;
-module.exports.parser = {
-  parse: source => babylon.parse(source, {
-    sourceType: 'module',
-    plugins: [
-      'typescript'
-    ],
-  }),
-};

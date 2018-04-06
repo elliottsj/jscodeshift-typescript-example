@@ -2,10 +2,16 @@
 
 const transform = require('../reverse-identifiers');
 const defineInlineTest = require('jscodeshift/dist/testUtils').defineInlineTest;
+const runInlineTest = require('jscodeshift/dist/testUtils').runInlineTest;
 
-defineInlineTest(
-  transform,
-  {},
-  'let foo: string = ""',
-  'let oof: string = ""'
-);
+it('transforms correctly', () => {
+  runInlineTest(
+    transform,
+    {},
+    {
+      path: 'source.ts',
+      source: 'let foo: string = <string>"somestring"',
+    },
+    'let oof: string = <string>"somestring"',
+  );
+});
