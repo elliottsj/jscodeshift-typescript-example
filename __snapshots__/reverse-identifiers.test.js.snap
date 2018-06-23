@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`transforms correctly 1`] = `
+"type yarrAemaNrOemaN = string | string[];
+
+function emaNetaerc(eman: yarrAemaNrOemaN) {
+    if (typeof eman === \\"string\\") {
+        return eman;
+    }
+    else {
+        return eman.nioj(\\" \\");
+    }
+}
+
+var egasseMgniteerg = \`Greetings, \${ emaNetaerc([\\"Sam\\", \\"Smith\\"]) }\`;
+trela(egasseMgniteerg);
+"
+`;

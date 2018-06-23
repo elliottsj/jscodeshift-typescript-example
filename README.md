@@ -1,7 +1,5 @@
-# jscodeshift-transforms
-A collection of jscodeshift transforms
-
-Includes transforms for TypeScript.
+# jscodeshift-typescript-example
+Example of using jscodeshift with TypeScript.
 
 ### Usage
 First install:
@@ -9,12 +7,12 @@ First install:
 npm install
 ```
 
-Transforms are in [transforms/](transforms). Run a transform on your code:
+Try the reverse-identifiers transform:
 ```shell
-./node_modules/.bin/jscodeshift -t ./transforms/reverse-identifiers.js --dry --extensions js,ts ../path/to/your/code
+./node_modules/.bin/jscodeshift -t ./reverse-identifiers.js --extensions ts ./reverse-identifiers.input.ts --print
 ```
 
-Omit `--dry` to write transformed code to disk. See `./node_modules/.bin/jscodeshift --help` for all options.
+_Omit `--print` to write the transformed source back to disk._
 
 ### Test
 ```shell
