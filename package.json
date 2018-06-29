@@ -11,8 +11,8 @@
   },
   "devDependencies": {
     "babylon": "^7.0.0-beta.44",
-    "jest": "^22.4.3",
+    "jest": "^23.2.0",
     "jscodeshift": "^0.5.0",
-    "recast": "^0.14.7"
+    "recast": "^0.15.0"
   }
 }
