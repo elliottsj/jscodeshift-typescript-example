@@ -1,4 +1,7 @@
 # jscodeshift-typescript-example
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/elliottsj/jscodeshift-typescript-example.svg)](https://greenkeeper.io/)
+
 Example of using jscodeshift with TypeScript.
 
 ### Usage
