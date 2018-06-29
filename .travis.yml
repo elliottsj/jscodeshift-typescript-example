@@ -1,0 +1,24 @@
+# Use Trusty beta environment: https://docs.travis-ci.com/user/reference/trusty/
+dist: trusty
+sudo: false
+
+language: node_js
+node_js:
+  - '6'
+  - '8'
+  - 'stable'
+
+# Make Greenkeeper work with lockfiles:
+# https://github.com/greenkeeperio/greenkeeper-lockfile/tree/d675ee5ccd4b035bbe135e63b38e397af261373f#npm
+env:
+  global:
+    # GH_TOKEN
+    - secure: vZhLVggarP4P8xRtoB3yvEJNo2R9NrE6U1e7wVpdhgUcUEIA7XW8bAUfc3pxrnmZTa1Hpl0/zrOOMtR0LYrgqolK6HkvL8fziA+LWIu+2G2Ub1g7IY55Do3E2eKCLXUz0kGSSFwAG4mGn6ycF2HN9UP9ipci7z8nSoboWvAl0i9lO1fDI4RWg1Zjdy0giAbGHSw/mxh3U91CaLSZC/c1Xx0UuZB/j4fvzinF+XLez/w9kobc6swoKEAmn6l3jF05vZlnNcU0ASwH3dFEExY9pX6FELVxkEHUOFXbueUplUWe4VBeNQ3DxI+X/BSBUXq1wMuwaXQAzl+EJ14Hgp9ZZhb3TGAoqYya2pH+ROVJuf9b7BSg13XfKyNonDAC9CsU1R9XVcyqJvD/vNgr32OiIy6jj2U3GAx19vGdxkI9GmSaRnNmabHGbboec7zlLAWSM7AAhIibE5Tvfiyswn3fdTA6gQnR/NTjFnCKscEJ2lbtTbM9mT2Kzlp6vc0pJB72zJtleOAWyJaYh+CUdYPsDkCfTdd9wiwfwmXn94ExrCLAy4kdLZn72ZbM4ZPuBCMv3AqpY+ge1ngMKNectgYktrIalV5o0xLGUCrTmYBIYsD1MHlAWKcuOVSNTc4aFMdVxeHVBbH3/BpFIGTH4eUDeni7oSGfJ1Vza4svXYhdz40=
+
+install: npm install
+before_install:
+# package-lock.json was introduced in npm@5
+- '[[ $(node -v) =~ ^v9.*$ ]] || npm install -g npm@latest' # skipped when using node 9
+- npm install -g greenkeeper-lockfile@1
+before_script: greenkeeper-lockfile-update
+after_script: greenkeeper-lockfile-upload
