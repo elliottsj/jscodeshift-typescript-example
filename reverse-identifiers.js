@@ -26,8 +26,7 @@ function transform(file, api) {
   return j(recast.parse(file.source, { parser: { parse } }))
     .find(j.Identifier)
     .replaceWith(
-      p => ({
-        ...p.node,
+      p => Object.assign({}, p.node, {
         name: p.node.name.split('').reverse().join('')
       })
     )
