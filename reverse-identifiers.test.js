@@ -1,20 +1,25 @@
 'use strict';
 
-const fs = require('fs');
-const jscodeshift = require('jscodeshift');
+const child_process = require('child_process');
 const path = require('path');
-const transform = require('./reverse-identifiers');
+const transform = require.resolve('./reverse-identifiers');
 
 it('transforms correctly', () => {
-  const inputPath = path.resolve(__dirname, 'reverse-identifiers.input.ts');
-  const file = {
-    path: inputPath,
-    source: fs.readFileSync(inputPath, 'utf8'),
-  }
-  const output = transform(file, {
-    jscodeshift,
-    stats: () => {},
-  });
+  const result = child_process.spawnSync(
+    path.join(__dirname, 'node_modules', '.bin', 'jscodeshift'),
+    [
+      '--dry',
+      '--print',
+      '--run-in-band',
+      '-t', transform,
+      '--extensions=ts',
+      '--parser=ts',
+      path.join(__dirname, './reverse-identifiers.input.ts'),
+    ],
+    {
+      encoding: 'utf8',
+    }
+  );
 
-  expect(output).toMatchSnapshot();
+  expect(result.stdout).toEqual(expect.stringContaining("type yarrAemaNrOemaN = string | string[];"));
 });
