@@ -7,23 +7,14 @@
  *  of patent rights can be found in the PATENTS file in the same directory.
  */
 
-const babylon = require('babylon');
-const recast = require('recast');
-
 /**
  * Example jscodeshift transformer. Simply reverses the names of all
  * identifiers. Stolen from:
  * https://github.com/facebook/jscodeshift/blob/7be2557f369794e915afe7f91ab81b1215e66857/sample/reverse-identifiers.js
  */
 function transform(file, api) {
-  const parse = source => babylon.parse(source, {
-    sourceType: 'module',
-    plugins: file.path.endsWith('.tsx') ? ['jsx', 'typescript'] : ['typescript'],
-  });
-  
   const j = api.jscodeshift;
-  
-  return j(recast.parse(file.source, { parser: { parse } }))
+  return j(file.source)
     .find(j.Identifier)
     .replaceWith(
       p => Object.assign({}, p.node, {
@@ -34,3 +25,4 @@ function transform(file, api) {
 }
 
 module.exports = transform;
+module.exports.parser = 'ts';
